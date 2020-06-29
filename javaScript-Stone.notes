@@ -630,4 +630,72 @@ Advanced Objects
 
     Factory Functions 
 
-        
+        A factory function is a function that returns an object 
+        and can be reused to make multiple object instances
+
+        const monsterFactory = (name, age, energySource, catchPhrase) => {
+        return { 
+            name: name,
+            age: age, 
+            energySource: energySource,
+            scare() {
+            console.log(catchPhrase);
+            } 
+        }
+        };
+        const ghost = monsterFactory('Ghouly', 251, 'ectoplasm', 'BOO!');
+        ghost.scare(); // 'BOO!'
+
+
+    Property Value Shorthand
+
+        const monsterFactory = (name, age) => {
+        return { 
+            name,
+            age 
+        }
+        };
+
+    Destructured Assignment
+
+        const robot = {
+        model: '1E78V2',
+        energyLevel: 100,
+        functionality: {
+            beep() {
+            console.log('Beep Boop');
+            },
+            fireLaser() {
+            console.log('Pew Pew');
+            },
+        }
+        };
+
+        const { functionality } = robot;  // Here is the Destructed Assignment 
+
+        functionality.beep();
+
+
+    Built-in Object Methods
+
+        https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object#Methods
+
+        .valueOf()
+        .hasOwnProperty()
+
+        const robot = {
+            model: 'SAL-1000',
+        mobile: true,
+        sentient: false,
+        armor: 'Steel-plated',
+        energyLevel: 75
+        };
+
+        const robotKeys = Object.keys(robot);
+        console.log(robotKeys);
+
+        const robotEntries = Object.entries(robot);
+        console.log(robotEntries);
+
+        const newRobot = Object.assign({laserBlaster: true, voiceRecognition: true}, robot);
+        console.log(newRobot);
