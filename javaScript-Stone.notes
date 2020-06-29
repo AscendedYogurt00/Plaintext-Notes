@@ -1,0 +1,293 @@
+ [2020-06-23]
+General
+    // Prints 5 to the console
+    console.log(5);
+
+    /*
+    This is all commented 
+    console.log(10);
+    None of this is going to run!
+    console.log(99);
+    */
+    console.log(5);
+
+    console.log('JavaScript');
+
+
+    String Interpolation
+        var myName = 'Alex';
+        var myCity = 'New York';
+        console.log(`My name is ${myName}. My favorite city is ${myCity}`);
+
+Conditionals 
+
+    If Else
+        let mood = 'sleepy';
+        let tirednessLevel = 6;
+
+        if (mood === 'sleepy' && tirednessLevel > 8) {
+        console.log('time to sleep')
+        }
+        else {
+        console.log('not bed time yet')
+        }
+
+
+    Truthy and Fasly Assignments 
+
+        let writingUtensil = tool || 'pen';
+
+
+    Ternary Operator       
+
+        Basically an if else statement shortened 
+
+        let isLocked = false;
+
+        isLocked ? console.log('You will need a key to open the door.') 
+        : console.log('You will not need a key to open the door.');
+        
+        favoritePhrase === 'Love That!' ? console.log('I love that!') 
+        : console.log("I don't love that!")
+
+    Else If
+
+        let groceryItem = 'papaya';
+
+        if (groceryItem === 'tomato') {
+        console.log('Tomatoes are $0.49');
+        } else if (groceryItem === 'papaya'){
+        console.log('Papayas are $1.29');
+        } else {
+        console.log('Invalid item');
+        }
+
+Switch Keyword
+
+    let groceryItem = 'papaya';
+
+    switch (groceryItem) {
+    case 'tomato':
+        console.log('Tomatoes are $0.49');
+        break;
+    case 'lime':
+        console.log('Limes are $1.49');
+        break;
+    case 'papaya':
+        console.log('Papayas are $1.29');
+        break;
+    default:
+        console.log('Invalid item');
+        break;
+    }
+
+Functions
+
+    function greetWorld() {
+    console.log('Hello, World!');
+    }
+
+    Parameters
+        function sayThanks(name) {
+        console.log('Thank you for your purchase ' + name + '! We appreciate your business.');
+        }
+
+        sayThanks('Cole')
+
+    Default Parameters
+
+        function makeShoppingList(item1 = 'milk', item2 = 'bread', item3 = 'eggs'){
+        console.log(`Remember to buy ${item1}`);
+        console.log(`Remember to buy ${item2}`);
+        console.log(`Remember to buy ${item3}`);
+        }
+
+
+    Function Expressions 
+
+        const plantNeedsWater = function(day, plantNeedsWater){
+        if(day === 'Wednesday'){
+            return true;
+        }
+        else {
+            return false;
+          }
+        }
+
+        console.log(plantNeedsWater('Tuesday'));       
+
+    Arrow Functions
+
+       ES6 introduced arrow function syntax, a shorter way to write functions by using the special “fat arrow” () => notation.
+
+        Arrow functions remove the need to type out the keyword function every time you need to create a function. 
+        Instead, you first include the parameters inside the ( ) 
+        and then add an arrow => that points to the function body surrounded in { } like this:
+
+            const rectangleArea = (width, height) => {
+            let area = width * height;
+            return area;
+            };
+
+    Concise Body Arrow Functions
+
+        const squareNum = (num) => {
+        return num * num;
+        };     
+
+        turns into 
+
+        const squareNum = num => num * num;
+
+        const plantNeedsWater = (day) => {
+        return day === 'Wednesday' ? true : false;
+        };
+
+        turns into 
+
+        const plantNeedsWater = day => day === 'Wednesday' ? true : false;
+
+    Functions as Data
+
+        const checkThatTwoPlusTwoEqualsFourAMillionTimes = () => {
+        for(let i = 1; i <= 1000000; i++) {
+            if ( (2 + 2) != 4) {
+            console.log('Something has gone very wrong :( ');
+            }
+        }
+        }
+
+        // Write your code below
+        const is2p2 = checkThatTwoPlusTwoEqualsFourAMillionTimes;
+
+        is2p2();
+
+        console.log(is2p2.name);
+
+    
+
+Arrays
+
+    let concepts = ['creating arrays', 'array structures', 'array manipulation'];
+
+    const hello = 'Hello World';
+    console.log(hello[6]);
+    // Output: W
+
+    const objectives = ['Learn a new languages', 'Read 52 books', 'Run a marathon'];
+    console.log(objectives.length)
+    // Output: 3
+
+
+
+    .push() 
+
+        adds items to the end of an array
+
+    .pop() 
+
+        removes an item from the end of the array
+
+    .shift()  
+
+        moves the array down and removes any item that moves off the list
+        
+    .unshift() 
+
+        adds the parameter to the beginning of the list
+
+    .slice()
+
+        cuts the items out of array and returns those values
+        does not effect the original array 
+
+        console.log(groceryList.slice(1,4));
+
+    .indedOf()
+
+    Nested Arrays 
+
+        const nestedArr = [[1], [2, 3]];
+        console.log(nestedArr[1]); // Output: [2, 3]
+
+        const numberClusters = [[1,2],[3,4],[5,6]];
+        console.log(numberClusters[2][1]); // Output 6
+
+
+Loops
+
+    For Loop
+
+        for (let counter = 0; counter < 4; counter++) {
+            console.log(counter);
+        }
+        
+    Nested Loops
+
+        const bobsFollowers = ['Steve', 'Matt', 'Ian', 'Michael'];
+        const tinasFollowers = ['Matt', 'Michael', 'John'];
+        const mutualFollowers = [];
+
+        for(let i = 0; i < bobsFollowers.length; i++){
+        for(let j = 0; j < tinasFollowers.length; j++){
+            if(bobsFollowers[i] === tinasFollowers[j]){
+            mutualFollowers.push(bobsFollowers[i]);
+            }
+         } 
+        }
+
+    While Loop 
+
+        let counterTwo = 1;
+        while (counterTwo < 4) {
+        console.log(counterTwo);
+        counterTwo++;
+        }
+
+    Do While Loops
+
+        let countString = '';
+        let i = 0;
+
+        do {
+        countString = countString + i;
+        i++;
+        } while (i < 5);
+
+        console.log(countString);
+
+    Break Statements 
+
+        JavaScript supports break statements 
+
+Iterators 
+    .forEach()
+
+        Aptly named, .forEach() will execute the same code for each element of an array.
+
+        const artists = ['Picasso', 'Kahlo', 'Matisse', 'Utamaro'];
+        artists.forEach(artist => {
+        console.log(artist + ' is one of my favorite artists.');
+        });
+
+
+        const fruits = ['mango', 'papaya', 'pineapple', 'apple'];
+        fruits.forEach(fruitsItem => console.log('I want to eat a ' + fruitsItem));
+
+    .map()
+        
+        When .map() is called on an array, 
+        it takes an argument of a callback function and returns a new array! 
+        
+        const numbers = [1, 2, 3, 4, 5];
+        const squareNumbers = numbers.map(number => {
+        return number * number;
+        });
+
+    .filter()
+
+        const things = ['desk', 'chair', 5, 'backpack', 3.14, 100];
+        const onlyNumbers = things.filter(thing => {
+        return typeof thing === 'number';
+        });
+

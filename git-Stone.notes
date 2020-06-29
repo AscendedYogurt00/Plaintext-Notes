@@ -1,0 +1,254 @@
+[2020-06-16] 
+Notes: 
+Basics Git commands and how it works
+
+    Just starting commands 
+        $ git config --global user.name amstone2
+        $ git config --global user.email amstone2@millersville.edu
+
+    Starting a repository 
+        $ mkdir store 
+        $ cd store
+
+        $ git init                                          creates local git repo 
+
+
+
+    Git workflow 
+        create the file README.txt
+        add the flile to staging area 
+        commit changes
+        modify README.txt and add a new one called LICENSE
+        add both files to the saging area 
+        commit changes
+
+    Git commands for workflow
+        $ git status                                          tells you what has changed since the last commit 
+        $ git add README.txt                                  adds it to the staging area 
+        $ git commit -m "Create a README."                    commits the file with a message of what the commit does
+
+        modyifying README.txt and adding a LICENSE
+
+        $ git status                                          shows we changed the files
+        $ git add README.txt LICENSE                          adds the files to the staging area
+            or $ git add --all
+        $ git commit -m "Adds LICENSE and changes README."
+
+        $ git log                                             shows all commits 
+
+    Seeing the changes you made
+        $ git diff                                            shows what was changed to a file 
+        $ git diff --staged                                   shows what was changed when the files are in the staging area
+
+    Unstaging a file and resetting it 
+        $ git reset HEAD LICNSE                               removes the file from the staging area
+        $ git checkout -- LICENSE                             removes the changes since the last commit
+
+    Skipping staging and commiting 
+        modify the README file
+        $ git commit -a -m "Modify README"                    adds changes from all tracked files
+
+    Undoing a commit  -  dont use after you push
+        $ git reset --soft HEAD^                              resets into staging
+        $ git reset --hard HEAD^                              undo last commit and ALL changes
+        $ git reset --hard HEAD^^                             undo last two commits and ALL changes
+
+    Adding to a finished commit 
+        create a todo.txt
+        $ git add todo.txt 
+        $ git commit --amend -m "Modify README and add todo.txt"    adds the staging area to the last commits and overrides the commit message with the new one
+
+
+Using GitHub 
+
+    Setup from an already existing repository on local computer
+        create and account and add a new repository
+        $ git remote add origin https://github.com/amstone2/git-real.git    connects the local with Github
+        $ git push -u origin master                                         pushes to guthub
+
+    Pulling 
+        $ git pull                                             pulls down the repo and merges with your local so you have the most updated files
+
+    Working with remotes
+        $ git remote add <name> <address>                       adds the new remote
+        $ git remote rm <name>                                  remotes the remote
+        $ git -u <name> <branch>                                pushes to the remote - -u makes you not have to specify the name and the brach on your next push
+
+
+Cloning a repo 
+
+    get the url of the repo from github 
+    $ git clone https://github.com/amstone2/git-real.git            adds it with the same name 
+    $ git clone https://github.com/amstone2/git-real.git git-demo   adds it with a different local folder name       
+
+    copies the repo
+    creates a remote called origin and points it at the URL
+    checks out the initial branch (likely master)
+    $ git remote -v                                                 lists all the remotes            
+
+Branching 
+    Creating a branch
+        Why? When you need to work on a feature that will take time
+
+        $ git branch cat                                            creates a branch called cat
+        $ git branch                                                to see which branch we are on
+        $ git checkout cat                                          moves us to the cat branch/timeline
+
+        $ git checkout -b <name>                                    creates and checksout the branch
+
+        $ echo "Schrodinger" > cat.txt                              creates a new file with Schrodinger
+        $ git add cat.txt                                           adds to cat branch stagging area 
+        $ git commit -m "create quantum cat"                        commits to cat branch
+
+    Merging a brach 
+        $ git checkout master                                       makes sure you are on the master branch
+        $ git merge cat                                             merges cat with master
+
+
+    Rebasing 
+        takes a set of commits and copies them somewhere else
+        makes a clean linear sequence of commits
+
+        $ git rebase master                                         moves the current branch back to master
+
+        if you have to rebase multiple commits a UI will appear
+
+        git rebase -i HEAD~4                                        copied down commits in the way you specified in the UI
+
+
+    Moving the HEAD to a commit
+        $ git checkout <commit-hash>                                use '$ git log ' to find the hashes
+        or $ git checkout HEAD^
+        or $ git checkout HEAD~4                                    moves HEAD to 4 commits above HEAD 
+    
+    Branch forcing 
+        reassign a branch to a commit with -f 
+
+        git branch -f master HEAD~3                                 moves (by force) the master branch to three parents behind HEAD.
+
+    Git reset   -   for local 
+        resets the changesby moving the branch back 
+        $ git reset HEAD^
+
+    Git revert   -   for pushed 
+        reverses changes and SHARES them with others 
+        
+        $ git revert HEAD
+
+    Git Cherry-pick
+        copy a series of commits into your current location
+        $ git cherry-pick <Commit1> <Commit2> <...>
+
+    Tagging 
+        make a point where the state of the project cannot be changed
+
+        $ git tag <nameOfTheTag> <commit-hash>
+
+    Git describe
+        describes where you are relative to the closest "anchor"
+
+        $ git describe <ref>                                        <ref> is anything git can resolve to a commit, can just be HEAD
+        output $ <tag>_<numCommits>_g<hash>                         Where tag is the closest ancestor tag in history, 
+                                                                    numCommits is how many commits away that tag is, 
+                                                                    and <hash> is the hash of the commit being described.
+
+    Remote Branching 
+
+        <remote name>/<branch name>
+
+        thier main remote is "origin"
+
+        $ git checkout o/master; git commit       checks out a remote master and commits 
+
+Git Fetch 
+
+    downloads the commits that the remote has but are missing from our local repository, and...
+    
+    updates where our remote branches point (for instance, o/master)
+    
+    git fetch, however, does not change anything about your local state. 
+    It will not update your master branch or change anything about how your file system looks right now.
+
+Git Pull
+
+    fetching remote changes and then merging them
+
+Git Push 
+
+    responsible for uploading your changes to a specified remote and updating that remote to incorporate your new commits
+
+Diverged Work
+    
+    $ git pull --rebase           pulls the new changes then rebases the work 
+
+
+Remote Rejected 
+
+    The remote rejected the push of commits directly to master 
+    because of the policy on master requiring pull requests to instead be used.
+
+
+Remote Tracking
+
+    "remote tracking" property of branches. 
+    The master branch is set to track o/master -- this means there is an implied merge target and implied push destination for the master branch.
+
+    $ git checkout -b totallyNotMaster o/master       Creates a new branch named totallyNotMaster and sets it to track o/master.
+
+    $ git branch -u o/master foo          will set the foo branch to track o/master. If foo is currently checked out you can even leave it off: git branch -u o/master
+
+
+Git Push Arguments 
+
+    $ git push <remote> <place>
+
+    $ git push origin master
+
+        By specifying master as the "place" argument, we told git where the commits will come from and where the commits will go. 
+        It's essentially the "place" or "location" to synchronize between the two repositories.
+
+    In order to specify both the source and the destination of <place>, simply join the two together with a colon:
+
+        $ git push origin <source>:<destination>
+
+            <source> is any location that git will understand
+
+            ex. $ git push origin foo^:master
+        
+            pushing to a new branch 
+
+                $ git push origin master:NewBranch
+
+Git Fetch Arguments 
+
+    $ git fetch origin <source>:<destination>
+
+    <source> is now a place on the remote and <destination> is a local place to put those commits. 
+    It's the exact opposite of git push, and that makes sense since we are transferring data in the opposite direction!
+
+
+
+Oddities of <source>
+
+    pusing nothing to a remote branch deletes it 
+
+        ex. $ git push origin :foo      deletes the branch foo
+
+    fetching nothing creates a new branch
+
+        ex. $ git fetch origin :bar
+
+Git Pull arguments 
+
+    $ git pull origin foo is equal to:
+        $ git fetch origin foo; git merge o/foo
+
+    $ git pull origin bar~1:bugFix is equal to:
+        $ git fetch origin bar~1:bugFix; git merge bugFix
+    
+
+
+
+end        
+
+
