@@ -812,6 +812,196 @@ Browser Compatibility and Transpilation
 
     Babel — A Javascript library that you can use to convert new, unsupported JavaScript (ES6), into an older version (ES5) that is recognized by most modern browsers.
 
-    
+        $ npm install babel-cli    
+        $ npm install babel-preset-env
+        $ npm run build
+        // not sure why these are here 
 
+    Creating a JavaScript project that transpiles code when you run npm run build from the root directory of a JavaScript project.
+
+        Installing Node Packet manager - https://docs.npmjs.com/getting-started/what-is-npm
+
+        $ npm init   // creates an package.json
+
+        $ npm install babel-cli -D
+        $ npm install babel-preset-env -D
+
+        in the root direcory create a .bablerc file
+        $ touch .babelrc 
+
+        Add: 
+            {
+            "presets": ["env"]
+            }
+        to the .babelrc file to specify we are translating from ES6
+
+        Inside of the package.json file, there is a property named "scripts" that holds an object for specifying command line shortcuts.
+
+        In the code above, the "scripts" property contains an object with one property called "test". Below the "test" property, we will add a script that runs Babel like this:
+            ...
+            "scripts": {
+            "test": "echo \"Error: no test specified\" && exit 1",
+            "build": "babel src -d lib"
+            }
+
+        $ npm run build
+            Babel writes the ES5 code to a file named main.js (it’s always the same name as the original file), inside of a folder called lib
+            The npm run build command will transpile all JavaScript files inside of the src folder
+
+
+
+Intermediate JavaScript Modules
+
+    https://nodejs.org/en/about/
+
+    JavaScript modules are reusable pieces of code that can be exported from one program and imported for use in another program.
+
+    The pattern we use to export modules is thus:
+
+        1.  Create an object to represent the module.
+        2.  Add properties or methods to the module object.
+        3.  Export the module with module.exports.
+
+        // airplane.js
+        let Airplane = {}
+        Airplane.myAirplane = 'StarJet';
+        module.exports = Airplane;
+    
+    require()
+
+        To make use of the exported module and the behavior we define within it, we import the module into another file. In Node.js, use the require() function to import modules.
+
+        Import the module with require() and assign it to a local variable.
+        Use the module and its properties within a program.
+
+            // missionControl.js
+            const Airplane = require('./1-airplane.js')
+
+            const displayAirplane = () => {
+            console.log(Airplane.myAirplane);
+            }
+            displayAirplane();
+        
+    module.exports
+
+        // 2-airplane.js
+        module.exports = {
+        myAirplane: "CloudJet", 
+        displayAirplane: function() {
+            return this.myAirplane;
+        }
+        };
+
+        // 2-missionControl.js
+        module.exports = {
+        myAirplane: "CloudJet", 
+        displayAirplane: function() {
+            return this.myAirplane;
+        }
+        };
+
+    export default 
+
+        const Airplane = {
+        availableAirplanes: [{name: 'AeroJet', fuelCapacity: 800}, {name: 'SkyJet', fuelCapacity: 500}]
+        }
+        export default Airplane;    // Here is export default
+
+    import 
+
+        import Airplane from './airplane';
+
+        const displayFuelCapacity = () => {
+        Airplane.availableAirplanes.forEach(function (element) {
+            console.log('Fuel capacity of ' + element.name + ': ' + element.fuelCapacity);
+        });
+
+
+        }
+        console.log(displayFuelCapacity());
+
+    
+    Named Exports 
+
+        // airplane.js
+        let availableAirplanes = [{name: 'AeroJet', fuelCapacity: 800, availableStaff: ['pilots', 'flightAttendants', 'engineers', 'medicalAssistance', 'SensorOperators']}, {name: 'SkyJet', fuelCapacity: 500, availableStaff: ['pilots', 'flightAttendants']}]
+
+        let flightRequirements = {
+        requiredStaff: 4
+
+        }
+        const meetsStaffRequirements = (availableStaff, requiredStaff) => {
+            if(availableStaff.length >= requiredStaff){
+            return true;
+            }
+            else {
+            return false;
+            }
+        }
+        export {availableAirplanes, flightRequirements, meetsStaffRequirements};
+
+
+    Named Imports
+
+        // missionControl.js
+        import  { availableAirplanes, flightRequirements, meetsStaffRequirements } from './airplane';   // new import statement 
+
+        const displayFuelCapacity = () => {
+        availableAirplanes.forEach(function (element) {
+            console.log('Fuel capacity of ' + element.name + ': ' + element.fuelCapacity);
+        });
+        }
+        console.log(displayFuelCapacity());
+    
+        function displayStaffStatus(){
+        availableAirplanes.forEach(function (element){
+            console.log(element.name + ' meets staff requirements: ' + meetsStaffRequirements(element.availableStaff, flightRequirements.requiredStaff) );
+            
+        });
+        }
+
+        displayStaffStatus();
+
+    Export Named Exports
+
+        Named exports are also distinct in that they can be exported as soon as they are declared, by placing the keyword export in front of variable declarations.
+
+        export let specialty = '';
+        export function isVegetarian() {
+        }; 
+        function isLowSodium() {
+        }; 
+
+    Import Named Imports
+
+        import { specialty, isVegetarian } from 'menu';
+
+    Export as
+
+        let specialty = '';
+        let isVegetarian = function() {
+        }; 
+        let isLowSodium = function() {
+        }; 
+
+        export { specialty as chefsSpecial, isVegetarian as isVeg, isLowSodium };
+
+            1.  The as keyword allows us to give a variable name an alias as demonstrated in specialty as chefsSpecial and isVegetarian as isVeg.
+            2.  Since we did not give isLowSodium an alias, it will maintain its original name.
+
+    Import as
+
+        import { chefsSpecial, isVeg } from './menu';
+
+        Another way of using aliases is to import the entire module as an alias:
+            import * as Carte from './menu';
+
+            Carte.chefsSpecial;
+            Carte.isVeg();
+            Carte.isLowSodium(); 
+
+    You can combine different export statements and import statements 
+
+
+Prmoise and Asyasynchronous Programming 
 
