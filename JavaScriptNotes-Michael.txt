@@ -1,0 +1,45 @@
+Console is a panek that displays important messages like errors. 
+
+console.log();
+    Prints to the console whatever is put in the paranthesis. 
+
+// still is the commenting method. 
+
+/* Is for multi line comments.
+*/
+
+Concatenate strings using plus signs when the strings are in single quotes. 
+
+console.log('Hello'.length); // Prints 5
+
+DATA TYPES
+//first six are primitive 
+Number: Any number, including numbers with decimals: 4, 8, 1516, 23.42.
+String: Any grouping of characters on your keyboard (letters, numbers, spaces, symbols, etc.) surrounded by single quotes: ' ... ' or double quotes " ... ". Though we prefer single quotes. Some people like to think of string as a fancy word for text.
+Boolean: This data type only has two possible values— either true or false (without quotes). It’s helpful to think of booleans as on and off switches or as the answers to a “yes” or “no” question.
+Null: This data type represents the intentional absence of a value, and is represented by the keyword null (without quotes).
+Undefined: This data type is denoted by the keyword undefined (without quotes). It also represents the absence of a value though it has a different use than null.
+Symbol: A newer feature to the language, symbols are unique identifiers, useful in more complex coding. No need to worry about these for now.
+Object: Collections of related data.
+
+
+Methods
+    .toUpperCase()
+    - Takes a string and makes it all upper case.
+    .trim
+    - Takes a console.log() and trims whitespace around whatever is in the paranthesis. 
+
+
+Built-in objects
+    There is a MATH object in javascript 
+    Math.random will return a random number in between defined values.
+    console.log(Math.random()); // Prints a random number between 0 and 1
+    Math.random() * 50;
+    Math.floor(Math.random() * 50);
+    console.log(Math.floor(Math.random() * 50)); // Prints a random whole number between 0 and 50
+
+    console.log(Math.random() * 100);
+    console.log(Math.floor(Math.random() * 100));
+    console.log(Math.ceil(43.8));
+    console.log(Number.isInteger(2017));
+

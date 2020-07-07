@@ -1,0 +1,113 @@
+GIT REAL
+
+These are commands but GUIs are available. 
+
+Branch early and branch often. 
+
+
+
+
+$ git help for command line help
+
+$ git config --global user.name "Tanner Michael"  //Who gets credit
+$ git config --global user.email tmichae@millersville.edu  //What email you user
+$ git config --global color.ui true  //Pretty command line colors
+
+$ git status  //shows status of a file, whats changed
+$ git add AFILE  //adds tracking
+$ git commit -m "BLANK" //commit messege, what work was done?
+$ git log  //shows logs of commits
+
+Different ways to add,
+
+$ git add <list of files>  //Add the list of files
+$ git add --all  //Add all files
+$ git add *.txt  //Add all txt files in current directory
+$ git add docs/*.txt  //Add all txt files in docs directory
+$ git add docs/  //Add all files in docs directory
+$ git add "*.txt"  //Add all txt files in the whole project
+
+
+BRANCHES
+pointers to a specific commit -- nothing more
+
+$ git branch anExample
+$ git checkout <name>  //This puts you on the new branch before committing changes
+$ git checkout anExample; git commit
+
+//---------------------------------------------------\\
+
+BRANCHES AND MERGING
+This will allow us to branch off, develop a new feature, and then combine it back in.
+
+$ git merge  //Creates a commit with two special parents. 
+$ git checkout bugFix; git merge master
+
+Exercise:
+Make a new branch called bugFix
+Checkout the bugFix branch with git checkout bugFix
+Commit once
+Go back to master with git checkout
+Commit another time
+Merge the branch bugFix into master with git merge
+
+git branch bugFix
+git checkout bugFix
+git commit
+git checkout master
+git commitgit merge bugFix
+
+//-----------------------------------------------------\\
+
+REBASING
+Rebasing essentially takes a set of commits, "copies" them, and plops them down somewhere else.
+
+git rebase anExample
+
+Exercise:
+Checkout a new branch named bugFix
+Commit once
+Go back to master and commit again
+Check out bugFix again and rebase onto master
+
+git branch bugFix
+git checkout bugFix
+git commit
+git checkout master
+git commit
+git checkout bugFix
+git rebase master
+
+
+
+
+detach HEAD from bugFix and attach it to the commit instead.
+
+Specify this commit by its hash. The hash for each commit is displayed on the circle that represents the commit.
+
+git checkout HEAD
+git checkout C4
+
+
+
+RELATIVE REFS
+git log
+for example...  
+    in git log a hash could be fed2da64c0efc5293610bdd892f82a58e8cbc5d8. By typing fed2 it can still be identified by git. 
+
+- moving upwards a number of times with ~<num>
+
+Relative refs allow you to start somewhere memorable. Like the branch bugFix or HEAD. 
+moving upwards one commit at a time with ^
+- tells git to find the parent of the specified commit
+- by saying master^ is saying parent of master 
+- master ^^ is the grandparent of master
+
+example:
+    git checkout HEAD^
+    git checkout C3
+    
+
+
+
+
